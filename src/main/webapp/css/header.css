@@ -1,0 +1,26 @@
+.header_container .nav_container {
+  box-shadow: 0 0 16px 3px rgba(0, 0, 0, 0.4);
+  background: brown;
+}
+.header_container .nav_container .nav {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  list-style: none;
+}
+.header_container .nav_container .nav .link_container {
+  text-align: center;
+  width: 150px;
+  font-size: 1.2em;
+  padding: 10px;
+}
+
+.header_container .nav_container .nav .link_container .nav_link {
+  color: #ccc;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: .3s ease;
+}
+.header_container .nav_container .nav .link_container .nav_link:hover {
+  border-bottom: 1px solid #ccc;
+}

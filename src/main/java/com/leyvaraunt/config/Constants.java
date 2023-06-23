@@ -15,5 +15,10 @@ public class Constants {
   final public static String USER      = "root";
   final public static String PASSWORD  = "";
 
-  final public static String KEY_ERROR_MESSAJE = "error_message";
+  final public static String KEYNAME_ERROR_MESSAJE = "error_message";
+  final public static String KEYNAME_SESSION_MANAGER = "managerSession";
+
+  final public static String NAME_COOKIE_ID = "idCookie";
+  final public static String NAME_COOKIE_FULLNAME = "fullNameCookie";
+  final public static String NAME_COOKIE_USERNAME = "userNameCookie";
 }

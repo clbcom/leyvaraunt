@@ -26,7 +26,7 @@ public class ManagerModel extends ModelAbstract implements CrudInterface {
       manager.setId(result.getInt("id"));
       manager.setName(result.getString("name"));
       manager.setLastname(result.getString("lastname"));
-      manager.setPassword(result.getString("password"));
+      manager.setUsername(result.getString("username"));
     }
 
     return manager;

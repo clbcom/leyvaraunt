@@ -3,6 +3,7 @@ DELIMITER ;
 
 /* Agregaremos al usuario */
 CALL add_manager (NULL,"Cristhian", "Lima", "clb.com", MD5("clb"));
+CALL add_manager (1,"Erick", "Leyva", "leyva", MD5("leyva"));
 
 CALL add_information(
   1,

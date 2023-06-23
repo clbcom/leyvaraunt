@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.leyvaraunt.config.Constants"%>
 <%
-  String error_message = (String) request.getAttribute(Constants.KEY_ERROR_MESSAJE);
+  String error_message = (String) request.getAttribute(Constants.KEYNAME_ERROR_MESSAJE);
 %>
 
 <!DOCTYPE html>

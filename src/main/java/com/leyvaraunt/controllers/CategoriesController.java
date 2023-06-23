@@ -22,7 +22,7 @@ public class CategoriesController extends ControllerAbstract {
   }
 
   @Override
-  public void getAll(HttpServletRequest request, HttpServletResponse response) {
+  public void view(HttpServletRequest request, HttpServletResponse response) {
      ArrayList<EntitieInterface> cats = this.getModel().getAll();
      for (EntitieInterface cat: cats) {
        Categories c = (Categories) cat;
@@ -31,7 +31,7 @@ public class CategoriesController extends ControllerAbstract {
   }
 
   @Override
-  public void getById(HttpServletRequest request, HttpServletResponse response) {
+  public void viewById(HttpServletRequest request, HttpServletResponse response) {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 
@@ -43,6 +43,12 @@ public class CategoriesController extends ControllerAbstract {
   @Override
   public void delete(HttpServletRequest request, HttpServletResponse response) {
     throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  @Override
+  public void create(HttpServletRequest request, HttpServletResponse response) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'create'");
   }
   
 }

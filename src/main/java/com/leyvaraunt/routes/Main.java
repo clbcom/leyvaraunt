@@ -5,22 +5,48 @@
 package com.leyvaraunt.routes;
 
 import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.persistence.Enumerated;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.leyvaraunt.config.Constants;
-import com.leyvaraunt.controllers.ManagerController;
+import com.leyvaraunt.entities.Manager;
 
 /**
  *
  * @author Cristhian
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class Login extends HttpServlet {
+@WebServlet(name = "main", urlPatterns = { "/main" })
+public class Main extends HttpServlet {
+
+  public void responseServelet(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
+    Cookie[] cookies = request.getCookies();
+
+    if (cookies != null) {
+      Cookie idCookie = null;
+      for (Cookie cookie : cookies) {
+        if (cookie.getName().equals(Constants.NAME_COOKIE_ID)) {
+          idCookie = cookie;
+        }
+      }
+
+      if (idCookie == null) {
+        response.sendRedirect(request.getContextPath() + "/login");
+      } else {
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+      }
+    } else {
+      response.sendRedirect(request.getContextPath() + "/login");
+    }
+  }
 
   /**
    * Handles the HTTP <code>GET</code> method.
@@ -33,8 +59,7 @@ public class Login extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    ManagerController controller = new ManagerController();
-    controller.view(request, response);
+    this.responseServelet(request, response);
   }
 
   /**
@@ -48,8 +73,8 @@ public class Login extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    ManagerController controller = new ManagerController();
-    controller.login(request, response);
+    System.out.println("fordwardeo como POST");
+    this.responseServelet(request, response);
   }
 
   /**

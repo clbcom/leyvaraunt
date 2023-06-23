@@ -60,4 +60,8 @@ public class Manager implements EntitieInterface {
     this.password = password;
   }
 
+  @Override
+  public String toString() {
+    return "Manager [id=" + id + ", name=" + name + ", lastname=" + lastname + ", username=" + username + "]";
+  }
 }
