@@ -2,7 +2,6 @@
 DELIMITER $$
 /**************************** CREATE ***************************************/
 CREATE PROCEDURE add_product(
-  IN _id_manager INT,
   IN _id_category INT,
   IN _name VARCHAR(50),
   IN _description VARCHAR(200),
@@ -38,15 +37,14 @@ BEGIN
   SET _description_add = CONCAT('ID: ', LAST_INSERT_ID(), ', Producto: ', _name, ', Precio: ', _price);
   
   /* Agrega el registro sobre quien lo publico */
-  INSERT INTO modify(id_product, id_manager, type, description)
-  VALUES (LAST_INSERT_ID(), _id_manager, 'CREATE', _description_add);
+  INSERT INTO modify(id_product, type, description)
+  VALUES (LAST_INSERT_ID(), 'CREATE', _description_add);
 
   COMMIT;
 END
 $$
 
 CREATE PROCEDURE add_category(
-  IN _id_manager INT,
   IN _name_category VARCHAR(50)
 )
 BEGIN
@@ -81,8 +79,8 @@ BEGIN
   SET _description_add = CONCAT('ID: ', LAST_INSERT_ID(), ', Categoria: ', _name_category);
 
   /* Agrega informacion sobre quien lo agrego */
-  INSERT INTO modify(id_category, id_manager, type, description)
-  VALUES (LAST_INSERT_ID(), _id_manager, 'CREATE', _description_add);
+  INSERT INTO modify(id_category, type, description)
+  VALUES (LAST_INSERT_ID(), 'CREATE', _description_add);
 
   /* Confirmamos la transaccion */
   COMMIT;
@@ -90,7 +88,6 @@ END;
 $$
 
 CREATE PROCEDURE add_information(
-  IN _id_manager INT,
   IN _description TEXT,
   IN _location VARCHAR(200),
   IN _schedules VARCHAR(100)
@@ -116,8 +113,8 @@ BEGIN
   SET _description_add = CONCAT('ID: ', LAST_INSERT_ID(), ', Informacion: Se agrego informacion necesaria sobre el restaurante');
 
   /* Agregamos informacion sobre quien realizo la modificacion */
-  INSERT INTO modify (id_info, id_manager, type, description)
-  VALUES (LAST_INSERT_ID(), _id_manager, 'CREATE', _description_add);
+  INSERT INTO modify (id_info, type, description)
+  VALUES (LAST_INSERT_ID(), 'CREATE', _description_add);
 
   /* Confirmamos la transaccion */
   COMMIT;
@@ -128,7 +125,6 @@ $$
 
 CREATE PROCEDURE update_product(
   IN _id_product INT,
-  IN _id_manager INT,
   IN _id_category INT,
   IN _name VARCHAR(50),
   IN _description VARCHAR(200),
@@ -171,8 +167,8 @@ BEGIN
   SET _description_update = CONCAT('ID: ', _id_product, ', Producto: ', _name, ', Precio: ', _price);
 
   /* Agregamos informacion sobre la modificacion */
-  INSERT INTO modify(id_product, id_manager, type, description)
-  VALUES (_id_product, _id_manager, 'UPDATE', _description_update);
+  INSERT INTO modify(id_product, type, description)
+  VALUES (_id_product, 'UPDATE', _description_update);
 
   COMMIT;
 END
@@ -180,7 +176,6 @@ $$
 
 CREATE PROCEDURE update_categories(
   IN _id_category INT,
-  IN _id_manager INT,
   IN _name VARCHAR(50)
 )
 BEGIN
@@ -218,8 +213,8 @@ BEGIN
   SET _description_update = CONCAT('ID: ', _id_product, ', Categoria: ', _name);
 
   /* Guardamos informacion sobre la modificacion */
-  INSERT INTO modify(id_category, id_manager, type, description)
-  VALUES (_id_category, _id_manager, 'UPDATE', _description_update);
+  INSERT INTO modify(id_category, type, description)
+  VALUES (_id_category, 'UPDATE', _description_update);
 
   COMMIT;
 END
@@ -260,8 +255,8 @@ BEGIN
   SET _description_update = CONCAT('ID: ', _id_product, ', Information: Se modifico la informacion');
 
   /* Agregamos informacion sobre la modificacion */
-  INSERT INTO modify (id_info, id_manager, type, description)
-  VALUES (_id_information, _id_manager, 'UPDATE', _description_update);
+  INSERT INTO modify (id_info, type, description)
+  VALUES (_id_information, 'UPDATE', _description_update);
 
   COMMIT;
 END
@@ -270,8 +265,7 @@ $$
 /**************************** DELETE ***************************************/
 
 CREATE PROCEDURE delete_product(
-  IN _id_product INT,
-  IN _id_manager INT
+  IN _id_product INT
 )
 BEGIN
   DECLARE _description_delete VARCHAR(500);
@@ -291,8 +285,8 @@ BEGIN
 
   /* Una vez eliminado, agregamos informacion sobre la eliminacion*/
   IF _description_delete IS NOT NULL THEN
-    INSERT INTO modify (id_manager, type, description)
-    VALUES (_id_manager, 'DELETE', _description_delete);
+    INSERT INTO modify (type, description)
+    VALUES ('DELETE', _description_delete);
   END IF;
 
   COMMIT;
@@ -300,8 +294,7 @@ END
 $$
 
 CREATE PROCEDURE delete_category(
-  IN _id_category INT,
-  IN _id_manager INT
+  IN _id_category INT
 )
 BEGIN
   DECLARE _description_delete VARCHAR(500);
@@ -342,15 +335,14 @@ BEGIN
 
   /* Agregamos informacion sobre la modificacion en caso de que la categoria o menu EXISTA */
   IF _description_delete IS NOT NULL THEN
-    INSERT INTO modify (id_manager, type, description)
-    VALUES (_id_manager, 'DELETE', _description_delete);
+    INSERT INTO modify (type, description)
+    VALUES ('DELETE', _description_delete);
   END IF;
   COMMIT;
 END
 $$
 
 CREATE PROCEDURE delete_information (
-  IN _id_manager INT,
   IN _id_info INT
 )
 BEGIN
@@ -373,8 +365,8 @@ BEGIN
   DELETE FROM information WHERE information.id = _id_info;
 
   /* Agregamos informacion con respecto a la eliminacion */
-  INSERT INTO modify (id_manager, type, description)
-  VALUES (_id_manager, 'DELETE', "Informacion del restaurante eliminada");
+  INSERT INTO modify (type, description)
+  VALUES ('DELETE', "Informacion del restaurante eliminada");
 
   COMMIT;
 END
@@ -462,7 +454,6 @@ END
 $$
 /************************************** Manager (encargadoss) ************************************************/
 CREATE PROCEDURE add_manager(
-  IN _id_manager INT,
   IN _name VARCHAR(30),
   IN _lastname VARCHAR(50),
   IN _username VARCHAR(30),
@@ -482,7 +473,7 @@ BEGIN
   VALUES (_name, _lastname, _username, _password);
   
   INSERT INTO modify(id_manager, type, description)
-  VALUES (_id_manager, 'CREATE', CONCAT("Encargado: Se agrego a un nuevo encargado con ID: ", LAST_INSERT_ID(), ", Nombre de usuario: ", _username));
+  VALUES (LAST_INSERT_ID(), 'CREATE', CONCAT("Encargado: Se agrego a un nuevo encargado con ID: ", LAST_INSERT_ID(), ", Nombre de usuario: ", _username));
   
   COMMIT;
 END
@@ -508,16 +499,19 @@ BEGIN
   UPDATE manager
   SET
     name      = _name,
-    lastname  = _last_name,
+    lastname  = _lastname,
     username  = _username,
     password  = _password
   WHERE manager.id = _id_manager;
+  
+  INSERT INTO modify(id_manager, type, description)
+  VALUES (_id_manager, 'CREATE', CONCAT("Encargado: Se actualizo informacion del encargado con ID: ", _id_manager, ", Nombre de usuario: ", _username));
+
   COMMIT;
 END
 $$
 
 CREATE PROCEDURE delete_manager (
-  IN _id_manager INT,
   IN _id_manager_to_delete INT
 )
 BEGIN
@@ -527,8 +521,8 @@ BEGIN
   WHERE modify.id_manager = _id_manager_to_delete;
 
   /* Registramos la eliminacion del encargado */
-  INSERT INTO modify (id_manager, type, description)
-  VALUES (_id_manager, 'DELETE', CONCAT("Encargado: Se elimino al encargado con numero de ID: " + _id_manager_to_delete));
+  INSERT INTO modify (type, description)
+  VALUES ('DELETE', CONCAT("Encargado: Se elimino al encargado con numero de ID: " + _id_manager_to_delete));
 
   /* Finalmente se procede a eliminar al encargado */
   DELETE FROM manager WHERE manager.id = _id_manager_to_delete;

@@ -98,4 +98,4 @@ CREATE TABLE
         CONSTRAINT ck_state_booking CHECK(state_booking IN ('PENDING', 'CANCEL', 'SUCCES', 'LACK'))
     );
 
-SET autocommit = OFF;
+SET autocommit = 0;
