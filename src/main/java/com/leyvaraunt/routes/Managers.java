@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.leyvaraunt.controllers.ControllerAbstract;
 import com.leyvaraunt.controllers.ManagerController;
 
 /**
  *
  * @author Cristhian
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class Login extends HttpServlet {
-
+@WebServlet(name = "managers", urlPatterns = { "/managers" })
+public class Managers extends HttpServlet {
   /**
    * Handles the HTTP <code>GET</code> method.
    *
@@ -31,8 +31,20 @@ public class Login extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    ManagerController controller = new ManagerController();
-    controller.viewLogin(request, response);
+    ControllerAbstract controller = new ManagerController();
+    String newManager = request.getParameter("new");
+    String edit = request.getParameter("edit");
+    String delete = request.getParameter("delete");
+
+    if (newManager != null) {
+      controller.createView(request, response);
+    } else if (edit != null) {
+      controller.updateView(request, response);
+    } else if (delete != null) {
+      controller.delete(request, response);
+    } else {
+      controller.view(request, response);
+    }
   }
 
   /**
@@ -46,8 +58,20 @@ public class Login extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    ManagerController controller = new ManagerController();
-    controller.login(request, response);
+    ControllerAbstract controller = new ManagerController();
+    String newManager = request.getParameter("new");
+    String edit = request.getParameter("edit");
+    String delete = request.getParameter("delete");
+
+    if (newManager != null) {
+      controller.create(request, response);
+    } else if (edit != null) {
+      controller.update(request, response);
+    } else if (delete != null) {
+      controller.delete(request, response);
+    } else {
+      controller.view(request, response);
+    }
   }
 
   /**

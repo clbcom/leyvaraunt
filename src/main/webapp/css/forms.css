@@ -1,0 +1,36 @@
+.form .row {
+  text-align: center;
+}
+
+.form .row input {
+  width: 50%;
+  font-size: 1.2em;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.5)
+}
+
+.form .row > .btn {
+  border-radius: 10px;
+  width: 50%;
+  background: transparent;
+  padding:  5px 10px;
+  transition: 0.3s ease;
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #ccc;
+}
+
+.form .row > .btn.cancel {
+  border: 2px solid #068c96;
+  background: #068c96;
+
+}
+
+.form .row > .btn.send {
+  border: 2px solid #118f3b;
+  background: #118f3b;
+}
+.form .row > .btn:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}

@@ -7,7 +7,12 @@ package com.leyvaraunt.controllers;
 import com.leyvaraunt.models.CategoriesModel;
 import com.leyvaraunt.entities.Categories;
 import com.leyvaraunt.interfaces.EntitieInterface;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,33 +27,56 @@ public class CategoriesController extends ControllerAbstract {
   }
 
   @Override
-  public void view(HttpServletRequest request, HttpServletResponse response) {
-     ArrayList<EntitieInterface> cats = this.getModel().getAll();
-     for (EntitieInterface cat: cats) {
-       Categories c = (Categories) cat;
-       System.out.println(c);
-     }
+  public void view(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException  {
+    try {
+      ArrayList<EntitieInterface> cats;
+      cats = this.getModel().getAll();
+      for (EntitieInterface cat : cats) {
+        Categories c = (Categories) cat;
+        System.out.println(c);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
-  public void viewById(HttpServletRequest request, HttpServletResponse response) {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public void viewById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'viewById'");
   }
 
   @Override
-  public void update(HttpServletRequest request, HttpServletResponse response) {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public void delete(HttpServletRequest request, HttpServletResponse response) {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public void create(HttpServletRequest request, HttpServletResponse response) {
+  public void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'create'");
   }
-  
+
+  @Override
+  public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'update'");
+  }
+
+  @Override
+  public void updateView(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'updateView'");
+  }
+
+  @Override
+  public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'delete'");
+  }
+
+  @Override
+  public void createView(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'createView'");
+  }
+
+
 }

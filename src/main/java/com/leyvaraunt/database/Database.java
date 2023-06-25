@@ -37,6 +37,7 @@ public class Database {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
       this.connection = DriverManager.getConnection(this.url, this.user, this.password);
+      this.connection.setAutoCommit(false);
     } catch (ClassNotFoundException | SQLException ex) {
       System.err.println("Connect database fail: " + ex.getMessage());
     }

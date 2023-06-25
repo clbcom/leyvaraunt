@@ -1,0 +1,10 @@
+.main_container .container .box {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.main_container .container .box .form {
+  width: 100%;
+}

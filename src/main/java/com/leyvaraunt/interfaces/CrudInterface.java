@@ -4,6 +4,8 @@
  */
 package com.leyvaraunt.interfaces;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 /**
@@ -11,9 +13,18 @@ import java.util.ArrayList;
  * @author Cristhian
  */
 public interface CrudInterface {
-  public ArrayList<EntitieInterface> getAll();
-  public EntitieInterface getById(int id);
-  public boolean updateAll(ArrayList<EntitieInterface> newsEntities);
-  public boolean updateById(int id, EntitieInterface newEntitie);
-  public boolean deleteById(int id);
+  public ArrayList<EntitieInterface> getAll() throws SQLException;
+
+  public EntitieInterface getById(int id) throws SQLException;
+
+  public boolean insert(EntitieInterface newEntitie)
+      throws SQLException, SQLIntegrityConstraintViolationException;
+
+  public boolean updateAll(ArrayList<EntitieInterface> newsEntities)
+      throws SQLException, SQLIntegrityConstraintViolationException;
+
+  public boolean updateById(int id, EntitieInterface newEntitie)
+      throws SQLException, SQLIntegrityConstraintViolationException;
+
+  public boolean deleteById(int id) throws SQLException, SQLIntegrityConstraintViolationException;
 }

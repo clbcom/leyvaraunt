@@ -9,6 +9,7 @@ import com.leyvaraunt.interfaces.CrudInterface;
 import com.leyvaraunt.interfaces.EntitieInterface;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +60,12 @@ public class CategoriesModel extends ModelAbstract implements CrudInterface {
   @Override
   public boolean deleteById(int id) {
     throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  @Override
+  public boolean insert(EntitieInterface newEntitie) throws SQLException, SQLIntegrityConstraintViolationException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'insert'");
   }
 
 }
