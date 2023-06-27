@@ -2,19 +2,21 @@
   text-align: center;
 }
 
-.form .row input {
+.form .row input,
+.form .row textarea,
+.form .row select {
   width: 50%;
   font-size: 1.2em;
   padding: 5px 10px;
   border-radius: 10px;
-  border: 2px solid rgba(0, 0, 0, 0.5)
+  border: 2px solid rgba(0, 0, 0, 0.5);
 }
 
 .form .row > .btn {
   border-radius: 10px;
   width: 50%;
   background: transparent;
-  padding:  5px 10px;
+  padding: 5px 10px;
   transition: 0.3s ease;
   text-decoration: none;
   font-size: 1.2em;
@@ -24,7 +26,6 @@
 .form .row > .btn.cancel {
   border: 2px solid #068c96;
   background: #068c96;
-
 }
 
 .form .row > .btn.send {

@@ -9,7 +9,7 @@ CREATE PROCEDURE add_product(
 )
 BEGIN
   DECLARE unique_violation CONDITION FOR 1062;
-  DECLARE manager_nonexist CONDITION FOR 1452;
+  DECLARE category_nonexist CONDITION FOR 1452;
 
   /* Variable para escribir la informacion de la descripcion de la modificacion*/
   DECLARE _description_add VARCHAR(500);
@@ -22,11 +22,11 @@ BEGIN
       SET MESSAGE_TEXT = "El nombre del producto ya existe";
   END;
   
-  DECLARE EXIT HANDLER FOR manager_nonexist
+  DECLARE EXIT HANDLER FOR category_nonexist
   BEGIN
     ROLLBACK;
     SIGNAL SQLSTATE '23000'
-      SET MESSAGE_TEXT = "El encargado no existe";
+      SET MESSAGE_TEXT = "Seleccione un menu";
   END;
 
   START TRANSACTION;
@@ -281,7 +281,7 @@ BEGIN
   WHERE modify.id_product = _id_product;
 
   /* Sin ninguna relacion existente con modify, procedemos a eliminar el registro */
-  DELETE FROM products WHERE id_product = _id_product;
+  DELETE FROM products WHERE id = _id_product;
 
   /* Una vez eliminado, agregamos informacion sobre la eliminacion*/
   IF _description_delete IS NOT NULL THEN

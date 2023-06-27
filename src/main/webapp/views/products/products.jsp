@@ -1,10 +1,10 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> <%@page
-contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.leyvaraunt.entities.Categories"%>
+<%@page import="com.leyvaraunt.entities.Product"%>
 <%@page import="com.leyvaraunt.config.Constants"%>
 <%
-  String urlCategories = request.getContextPath() + "/categories";
+  String urlProducts = request.getContextPath() + "/products";
   String errorMessage = (String) request.getAttribute(Constants.KEYNAME_ERROR_MESSAJE);
 %>
 <!DOCTYPE html>
@@ -20,9 +20,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
       <main class="main_container">
         <div class="container">
           <div class="row">
-            <a href="${urlCategories}?new">
-              Agregar nueva categoria
-            </a>
+            <a href="${urlProducts}?new"> Agregar nuevo producto </a>
           </div>
           <c:if test="<%= errorMessage != null %>">
             <div class="row">
@@ -33,17 +31,25 @@ contentType="text/html" pageEncoding="UTF-8"%>
             <thead>
               <tr>
                 <th>Nombre</th>
-                <th>Nº Productos</th>
+                <th>Categoria</th>
+                <th>Descripcion</th>
+                <th>Precio Bs.</th>
                 <th colspan="2"></th>
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="category" items="${categories}">
+              <c:forEach var="product" items="${products}">
                 <tr>
-                  <td>${category.name}</td>
-                  <td>${category.countProducts}</td>
-                  <td><a href="${urlCategories}?edit=${category.id}">Editar</a></td>
-                  <td><a href="${urlCategories}?delete=${category.id}">Eliminar</a></td>
+                  <td><c:out value="${product.name}"/></td>
+                  <td><c:out value="${product.category}"/></td>
+                  <td><c:out value="${product.description}"/></td>
+                  <td><c:out value="${product.price}"/></td>
+                  <td>
+                    <a href="${urlProducts}?edit=${product.id}">Editar</a>
+                  </td>
+                  <td>
+                    <a href="${urlProducts}?delete=${product.id}">Eliminar</a>
+                  </td>
                 </tr>
               </c:forEach>
             </tbody>
