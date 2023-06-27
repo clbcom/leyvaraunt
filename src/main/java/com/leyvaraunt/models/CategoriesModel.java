@@ -7,12 +7,11 @@ package com.leyvaraunt.models;
 import com.leyvaraunt.entities.Categories;
 import com.leyvaraunt.interfaces.CrudInterface;
 import com.leyvaraunt.interfaces.EntitieInterface;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,50 +21,59 @@ public class CategoriesModel extends ModelAbstract implements CrudInterface {
 
   public CategoriesModel() {
     super();
-    this.setTableName("categories");
+    this.setTableName("count_products_by_category");
   }
 
   @Override
-  public ArrayList<EntitieInterface> getAll() {
-    ArrayList<EntitieInterface> categories = new ArrayList<>();
+  public ArrayList<EntitieInterface> getAll() throws SQLException {
     ResultSet result = this.findAll(this.getTableName());
-
-    try {
-      while (result.next()) {
-        Categories category = new Categories(result.getInt("id"), result.getString("name"));
-        categories.add(category);
-      }
-    } catch (SQLException ex) {
-      Logger.getLogger(CategoriesModel.class.getName()).log(Level.SEVERE, null, ex);
+    ArrayList<EntitieInterface> categories = new ArrayList<>();
+    while (result.next()) {
+      Categories category = new Categories();
+      category.setId(result.getInt("id_category"));
+      category.setName(result.getString("category"));
+      category.setCountProducts(result.getInt("num_products"));
+      categories.add(category);
     }
-    
     return categories;
   }
 
   @Override
-  public EntitieInterface getById(int id) {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public boolean updateAll(ArrayList<EntitieInterface> newsEntities) {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public boolean updateById(int id, EntitieInterface newEntitie) {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
-
-  @Override
-  public boolean deleteById(int id) {
-    throw new UnsupportedOperationException("Not supported yet.");
+  public EntitieInterface getById(int id) throws SQLException {
+    ResultSet result = this.findWithWhere(this.getTableName(), "id = ?", id);
+    Categories category = new Categories();
+    category.setId(result.getInt("id_category"));
+    category.setName(result.getString("category"));
+    category.setCountProducts(result.getInt("num_products"));
+    return category;
   }
 
   @Override
   public boolean insert(EntitieInterface newEntitie) throws SQLException, SQLIntegrityConstraintViolationException {
+    Categories newCategory = (Categories) newEntitie;
+    int result = this.callProcedure("add_category(?)", newCategory.getName());
+    return result > 0;
+  }
+
+  @Override
+  public boolean updateAll(ArrayList<EntitieInterface> newsEntities)
+      throws SQLException, SQLIntegrityConstraintViolationException {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'insert'");
+    throw new UnsupportedOperationException("Unimplemented method 'updateAll'");
+  }
+
+  @Override
+  public boolean updateById(int id, EntitieInterface newEntitie)
+      throws SQLException, SQLIntegrityConstraintViolationException {
+    Categories category = (Categories) newEntitie;
+    int result = this.callProcedure("update_category(?, ?)", category.getId(), category.getName());
+    return result > 0;
+  }
+
+  @Override
+  public boolean deleteById(int id) throws SQLException, SQLIntegrityConstraintViolationException {
+    int result = this.callProcedure("delete_category(?)", id);
+    return result > 0;
   }
 
 }

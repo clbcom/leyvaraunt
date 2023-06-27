@@ -1,7 +1,7 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <jsp:include page="/templates/styles.jsp">
       <jsp:param name="titleJsp" value="Leyvaraunt" />
     </jsp:include>

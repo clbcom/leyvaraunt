@@ -174,7 +174,7 @@ BEGIN
 END
 $$
 
-CREATE PROCEDURE update_categories(
+CREATE PROCEDURE update_category(
   IN _id_category INT,
   IN _name VARCHAR(50)
 )

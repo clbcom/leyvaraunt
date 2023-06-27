@@ -14,10 +14,15 @@ public class Categories implements EntitieInterface {
 
   private int id;
   private String name;
+  private int countProducts;
 
-  public Categories(int id, String name) {
+  public Categories() {
+  }
+
+  public Categories(int id, String name, int countProducts) {
     this.id = id;
     this.name = name;
+    this.countProducts = countProducts;
   }
 
   public int getId() {
@@ -36,9 +41,16 @@ public class Categories implements EntitieInterface {
     this.name = name;
   }
 
-  @Override
-  public String toString() {
-    return "Categories{" + "id=" + id + ", name=" + name + '}';
+  public int getCountProducts() {
+    return countProducts;
   }
 
+  public void setCountProducts(int countProducts) {
+    this.countProducts = countProducts;
+  }
+
+  @Override
+  public String toString() {
+    return "Categories [id=" + id + ", name=" + name + ", countProducts=" + countProducts + "]";
+  }
 }

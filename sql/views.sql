@@ -81,7 +81,7 @@ SELECT
   c.id id_category,
   c.name category,
   COUNT(p.name) num_products
-FROM products p INNER JOIN categories c
+FROM products p RIGHT JOIN categories c
   ON p.id_category = c.id
 GROUP BY c.id
 ORDER BY c.name;

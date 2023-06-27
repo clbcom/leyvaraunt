@@ -37,7 +37,9 @@
 .main_container .container table tbody tr:hover {
   background: #ccc;
 }
-
+.main_container .container table thead tr th {
+  text-align: left;
+}
 .main_container .container table tr td {
   padding: 10px;
   border-bottom: 2px solid #ccc;
