@@ -5,6 +5,13 @@
   margin: auto;
   padding: 10px;
 }
+.main_container .container .box_container .welcome {
+  padding: 10px;
+}
+.main_container .container .box_container .welcome .welcome_msg{
+  text-align: justify;
+}
+
 .error_msg {
   color: #db3e3e;
 }

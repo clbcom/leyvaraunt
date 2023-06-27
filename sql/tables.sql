@@ -2,14 +2,15 @@
 DELIMITER ;
 DROP DATABASE leyvaraunt;
 CREATE DATABASE leyvaraunt;
+ALTER DATABASE leyvaraunt CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci;
 use leyvaraunt;
 
 CREATE TABLE
     IF NOT EXISTS information (
         id INT(3) NOT NULL AUTO_INCREMENT,
         description TEXT NOT NULL,
-        location VARCHAR(200) NOT NULL,
-        schedules VARCHAR(100) NOT NULL,
+        location TEXT NOT NULL,
+        schedules TEXT NOT NULL,
         CONSTRAINT pk_id_info PRIMARY KEY (id)
     );
 

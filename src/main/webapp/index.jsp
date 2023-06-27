@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,8 +14,14 @@
         <div class="container">
           <div class="box_container">
             <div class="welcome">
-              <h2 class="welcome_title">Pagina de Bienvenida</h2>
-              <p class="welcome_msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad at maiores neque amet enim asperiores excepturi nulla quia blanditiis a rem officia accusamus mollitia, nemo vel eveniet adipisci? Aut repellat doloribus minima enim, veritatis iusto ad mollitia, veniam id dolor molestias officiis facilis placeat tenetur! Modi atque officia, reiciendis quas voluptates fugit deleniti nemo ipsum quasi alias, quae illum amet, numquam sequi ad ea eveniet pariatur aliquam optio quis ab ex! Veritatis obcaecati accusantium itaque corrupti totam debitis laborum enim doloremque voluptatem natus, dolorum ea incidunt hic ut voluptates dolorem reiciendis magnam repudiandae impedit? Explicabo recusandae blanditiis nam voluptates sint!</p>
+              <h2 class="welcome_title">Bienvenido a la web de Leyvaraunt</h2>
+            <c:forEach var="info" items="${information}">
+                <p class="welcome_msg">${info.description}</p>
+                <h2>Ubicacion</h2>
+                <p class="welcome_msg">${info.location}</p>
+                <h2>Horarios</h2>
+                <p class="welcome_msg">${info.schedule}</p>
+              </c:forEach>
             </div>
           </div>
         </div>

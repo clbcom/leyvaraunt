@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.leyvaraunt.config.Constants;
+import com.leyvaraunt.controllers.ControllerAbstract;
+import com.leyvaraunt.controllers.InformationController;
 
 /**
  *
@@ -24,24 +26,8 @@ public class Main extends HttpServlet {
 
   public void responseServelet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-    Cookie[] cookies = request.getCookies();
-
-    if (cookies != null) {
-      Cookie idCookie = null;
-      for (Cookie cookie : cookies) {
-        if (cookie.getName().equals(Constants.NAME_COOKIE_ID)) {
-          idCookie = cookie;
-        }
-      }
-
-      if (idCookie == null) {
-        response.sendRedirect(request.getContextPath() + "/login");
-      } else {
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-      }
-    } else {
-      response.sendRedirect(request.getContextPath() + "/login");
-    }
+        ControllerAbstract controller = new InformationController();
+        controller.view(request, response);
   }
 
   /**

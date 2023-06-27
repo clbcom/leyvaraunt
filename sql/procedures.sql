@@ -89,8 +89,8 @@ $$
 
 CREATE PROCEDURE add_information(
   IN _description TEXT,
-  IN _location VARCHAR(200),
-  IN _schedules VARCHAR(100)
+  IN _location TEXT,
+  IN _schedules TEXT
 )
 BEGIN
   /* Variable para la descripcion de lo que se agrego */
@@ -222,10 +222,9 @@ $$
 
 CREATE PROCEDURE update_information(
   IN _id_information INT,
-  IN _id_manager INT,
   IN _description TEXT,
-  IN _location VARCHAR(200),
-  IN _schedules VARCHAR(100)
+  IN _location TEXT,
+  IN _schedules TEXT
 )
 BEGIN
   /* Variable para la descripcion de lo que se agrego */
