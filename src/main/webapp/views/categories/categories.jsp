@@ -11,7 +11,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="es">
   <head>
     <jsp:include page="/templates/styles.jsp">
-      <jsp:param name="titleJsp" value="Leyvaraunt" />
+      <jsp:param name="titleJsp" value="Menus" />
     </jsp:include>
   </head>
   <body>

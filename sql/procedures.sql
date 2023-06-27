@@ -425,7 +425,7 @@ BEGIN
   WHERE manager.id = _id_manager;
   
   INSERT INTO modify(id_manager, type, description)
-  VALUES (_id_manager, 'CREATE', CONCAT("Encargado: Se actualizo informacion del encargado con ID: ", _id_manager, ", Nombre de usuario: ", _username));
+  VALUES (_id_manager, 'UPDATE', CONCAT("Encargado: Se actualizo informacion del encargado con ID: ", _id_manager, ", Nombre de usuario: ", _username));
 
   COMMIT;
 END

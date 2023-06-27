@@ -10,13 +10,10 @@
         <a href="<%= request.getContextPath() %>/products" class="nav_link">Productos</a>
       </li>
       <li class="link_container">
-        <a href="<%= request.getContextPath() %>/categories" class="nav_link">Categorias</a>
+        <a href="<%= request.getContextPath() %>/categories" class="nav_link">Menus</a>
       </li>
       <li class="link_container">
         <a href="<%= request.getContextPath() %>/managers" class="nav_link">Encargados</a>
-      </li>
-      <li class="link_container">
-        <a href="<%= request.getContextPath() %>/bookings" class="nav_link">Reservas</a>
       </li>
       <li class="link_container">
         <a href="<%= request.getContextPath() %>/history" class="nav_link">Historial de cambios</a>

@@ -11,7 +11,7 @@
 <html lang="es">
   <head>
     <jsp:include page="/templates/styles.jsp">
-      <jsp:param name="titleJsp" value="Productos" />
+      <jsp:param name="titleJsp" value="Historial" />
     </jsp:include>
   </head>
   <body>
@@ -20,7 +20,7 @@
       <main class="main_container">
         <div class="container">
           <div class="row">
-            <a href="${urlProducts}?new"> Agregar nuevo producto </a>
+            <h2>Historial de cambios</h2>
           </div>
           <c:if test="<%= errorMessage != null %>">
             <div class="row">
@@ -30,26 +30,19 @@
           <table>
             <thead>
               <tr>
-                <th>Nombre</th>
-                <th>Categoria</th>
+                <th>ID</th>
+                <th>Tipo</th>
                 <th>Descripcion</th>
-                <th>Precio Bs.</th>
-                <th colspan="2"></th>
+                <th>Fecha y Hora</th>
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="product" items="${products}">
+              <c:forEach var="one" items="${history}">
                 <tr>
-                  <td><c:out value="${product.name}"/></td>
-                  <td><c:out value="${product.category}"/></td>
-                  <td><c:out value="${product.description}"/></td>
-                  <td><c:out value="${product.price}"/></td>
-                  <td>
-                    <a href="${urlProducts}?edit=${product.id}">Editar</a>
-                  </td>
-                  <td>
-                    <a href="${urlProducts}?delete=${product.id}">Eliminar</a>
-                  </td>
+                  <td><c:out value="${one.id}"/></td>
+                  <td><c:out value="${one.type}"/></td>
+                  <td><c:out value="${one.description}"/></td>
+                  <td><c:out value="${one.date}"/></td>
                 </tr>
               </c:forEach>
             </tbody>
