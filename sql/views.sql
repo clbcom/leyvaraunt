@@ -10,12 +10,6 @@ DELIMITER ;
   * [X] all_products:                 Todos los registros de productos ordenados por categoria y nombre
   * [X] all_products_by_price:       TOdos los registros de productos ordenados por categoria y precio
   * [X] count_products_by_category:   Cantidad de productos por categoria o menu.
-  * [X] bookings_pending:             Reservas pendientes, quiere decir una reserva vigente
-  * [X] bookings_cancel:              Reservas canceladas
-  * [X] bookings_succes:              Reservas complidas donde el reservante llego al restaurant a la hora
-  * [X] bookings_lack:                Reservas a las que nunca llego el reservante.
-  * [X] bookings_with_card:           Reservas con una tarjeta de credito (se vuelve prioridad)
-  * [X] bookings_without_card:        Reservas sin una tarjeta de credito (no son prioridad)
   */
 CREATE OR REPLACE VIEW manager_login
 AS
@@ -85,45 +79,3 @@ FROM products p RIGHT JOIN categories c
   ON p.id_category = c.id
 GROUP BY c.id
 ORDER BY c.name;
-
-CREATE OR REPLACE VIEW bookings_pending
-AS
-SELECT *
-FROM bookings
-WHERE state_booking = 'PENDING'
-ORDER BY date_booking DESC, time_booking DESC;
-
-CREATE OR REPLACE VIEW bookings_cancel
-AS
-SELECT *
-FROM bookings
-WHERE state_booking = 'CANCEL'
-ORDER BY date_booking DESC, time_booking DESC;
-
-CREATE OR REPLACE VIEW bookings_succes
-AS
-SELECT *
-FROM bookings
-WHERE state_booking = 'SUCCES'
-ORDER BY date_booking DESC, time_booking DESC;
-
-CREATE OR REPLACE VIEW bookings_lack
-AS
-SELECT *
-FROM bookings
-WHERE state_booking = 'LACK'
-ORDER BY date_booking DESC, time_booking DESC;
-
-CREATE OR REPLACE VIEW bookings_with_card
-AS
-SELECT *
-FROM bookings
-WHERE id_card IS NOT NULL
-ORDER BY date_booking DESC, time_booking DESC;
-
-CREATE OR REPLACE VIEW bookings_without_card
-AS
-SELECT *
-FROM bookings
-WHERE id_card IS NULL
-ORDER BY date_booking DESC, time_booking DESC;
