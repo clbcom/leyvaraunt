@@ -49,12 +49,11 @@ CALL add_product(7, "Leche de majo", "NINGUNA", 7.43);
 CALL add_product(7, "Asai", "NINGUNA", 7.53);
 CALL add_product(7, "Jugo de maracuya", "NINGUNA", 4.53);
 CALL add_product(8, "Coctleyva", "NINGUNA", 14.99);
-CALL add_product(8, "Piña colada", "NINGUNA", 19.98);
 CALL add_product(8, "Martini", "NINGUNA", 24.98);
 CALL add_product(9, "Vino rozado LAMUE", "NINGUNA", 199.98);
 CALL add_product(9, "Vino blanco LAMUE", "NINGUNA", 149.98);
 CALL add_product(9, "Vino tinto LAMUE", "NINGUNA", 289.98);
-CALL add_product(9, "Vino tinto LAMUE exclusivo", "Una cosecha de hace mas de un siglo añejado desde 1893", 1289.98);
+CALL add_product(9, "Vino tinto LAMUE exclusivo", "Una cosecha de hace mas de un siglo macerado desde 1893", 1289.98);
 
 CALL add_booking(
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.35",
