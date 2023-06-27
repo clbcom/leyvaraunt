@@ -25,7 +25,7 @@
               </div>
               <c:if test="${error_message != null}">
                 <div class="row">
-                  <p class="msg">${error_message}</p>
+                  <p class="error_msg">${error_message}</p>
                 </div>
               </c:if>
               <form class="form_box" action="login" method="post">

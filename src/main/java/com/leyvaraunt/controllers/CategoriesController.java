@@ -91,20 +91,64 @@ public class CategoriesController extends ControllerAbstract {
 
   @Override
   public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'update'");
+    Cookie[] cookies = request.getCookies();
+    if (!this.isLogued(cookies)) {
+      response.sendRedirect(request.getContextPath() + "/login");
+      return;
+    }
+    String errorMessage = null;
+    Categories newCategory = new Categories();
+    try {
+      int idCategory = Integer.parseInt(request.getParameter("edit"));
+      newCategory.setId(idCategory);
+      newCategory.setName(request.getParameter("name"));
+      if (this.getModel().updateById(idCategory, newCategory)) {
+        System.out.printf("Categoria <%s> actualizado", newCategory.getName());
+        response.sendRedirect(request.getContextPath() + "/categories");
+        return;
+      }
+    } catch (SQLIntegrityConstraintViolationException e) {
+      System.out.println("Error: " + e.getMessage());
+      errorMessage = e.getMessage();
+    } catch (SQLException e) {
+      System.out.println(e);
+      errorMessage = e.getMessage();
+    }
+    request.setAttribute(Constants.KEYNAME_ERROR_MESSAJE, errorMessage);
+    request.setAttribute("category", newCategory);
+    request.getRequestDispatcher("views/categories/updateCategory.jsp").forward(request, response);
   }
 
   @Override
   public void updateView(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateView'");
+    Cookie[] cookies = request.getCookies();
+    if (!this.isLogued(cookies)) {
+      response.sendRedirect(request.getContextPath() + "/login");
+      return;
+    }
+    int idCategory = Integer.parseInt(request.getParameter("edit"));
+    try {
+      Categories category = (Categories) this.getModel().getById(idCategory);
+      request.setAttribute("category", category);
+      request.getRequestDispatcher("views/categories/updateCategory.jsp").forward(request, response);
+    } catch (SQLException e) {
+      System.out.println("Ocurrion un error en: " + e.getMessage());
+    }
   }
 
   @Override
   public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    int idCategory = Integer.parseInt(request.getParameter("delete"));
+    try {
+      if (this.getModel().deleteById(idCategory)) {
+        System.out.println("Categoria eliminada");
+        response.sendRedirect(request.getContextPath() + "/categories");
+      }
+    } catch (SQLException e) {
+      System.out.println("Error en CategoriesController.update(): " + e.getMessage());
+      request.setAttribute(Constants.KEYNAME_ERROR_MESSAJE, e.getMessage());  
+      this.view(request, response);
+    }
   }
 }

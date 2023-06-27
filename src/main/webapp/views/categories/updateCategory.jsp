@@ -10,7 +10,7 @@
 <html lang="es">
   <head>
     <jsp:include page="/templates/styles.jsp">
-      <jsp:param name="titleJsp" value="Nuevo" />
+      <jsp:param name="titleJsp" value="Editar" />
     </jsp:include>
   </head>
   <body>
@@ -20,17 +20,17 @@
         <div class="container">
           <div class="form">
             <div class="row">
-              <h2>Agregar Categoria</h2>
+              <h2>Editar Categoria</h2>
             </div>
             <c:if test="<%= errorMessage != null %>">
               <div class="row">
-                <p class="error_msg"><%= errorMessage %></p>
+                <p class="msg_error"><%= errorMessage %></p>
               </div>
             </c:if>
-            <form action="<%= urlCategories %>?new" class="form" method="POST">
+            <form action='<%= urlCategories + "?edit=" + category.getId() %>' class="form" method="POST">
               <div class="row">
                 <c:if test="${category != null}">
-                  <input type="text" name="name" id="name" placeholder="Nombre" value="${category.name}"/>
+                  <input type="text" name="name" id="name" placeholder="Nombre de categoria" value="${category.name}"/>
                 </c:if>
                 <c:if test="${category == null}">
                   <input type="text" name="name" id="name" placeholder="Nombre" />
@@ -44,7 +44,7 @@
                 >
               </div>
               <div class="row">
-                <input class="btn send" type="submit" value="Agregar" />
+                <input class="btn send" type="submit" value="Actualizar" />
               </div>
             </form>
           </div>

@@ -5,3 +5,6 @@
   margin: auto;
   padding: 10px;
 }
+.error_msg {
+  color: #db3e3e;
+}

@@ -40,11 +40,14 @@ public class CategoriesModel extends ModelAbstract implements CrudInterface {
 
   @Override
   public EntitieInterface getById(int id) throws SQLException {
-    ResultSet result = this.findWithWhere(this.getTableName(), "id = ?", id);
-    Categories category = new Categories();
-    category.setId(result.getInt("id_category"));
-    category.setName(result.getString("category"));
-    category.setCountProducts(result.getInt("num_products"));
+    ResultSet result = this.findWithWhere(this.getTableName(), "id_category = ?", id);
+    Categories category = null;
+    if (result.next()) {
+      category = new Categories();
+      category.setId(result.getInt("id_category"));
+      category.setName(result.getString("category"));
+      category.setCountProducts(result.getInt("num_products"));
+    }
     return category;
   }
 

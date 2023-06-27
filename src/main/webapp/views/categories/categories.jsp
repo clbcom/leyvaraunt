@@ -2,9 +2,11 @@
 contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.leyvaraunt.entities.Categories"%>
+<%@page import="com.leyvaraunt.config.Constants"%>
 <%
   ArrayList<Categories> category = (ArrayList<Categories>) request.getAttribute("categories");
   String urlCategories = request.getContextPath() + "/categories";
+  String errorMessage = (String) request.getAttribute(Constants.KEYNAME_ERROR_MESSAJE);
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,6 +25,11 @@ contentType="text/html" pageEncoding="UTF-8"%>
               Agregar nueva categoria
             </a>
           </div>
+          <c:if test="<%= errorMessage != null %>">
+            <div class="row">
+              <p class="error_msg"><%= errorMessage %></p>
+            </div>
+          </c:if>
           <table>
             <thead>
               <tr>

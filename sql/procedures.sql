@@ -210,7 +210,7 @@ BEGIN
     name = _name
   WHERE categories.id = _id_category;
 
-  SET _description_update = CONCAT('ID: ', _id_product, ', Categoria: ', _name);
+  SET _description_update = CONCAT('ID: ', _id_category, ', Categoria: ', _name);
 
   /* Guardamos informacion sobre la modificacion */
   INSERT INTO modify(id_category, type, description)

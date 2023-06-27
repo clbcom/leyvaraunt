@@ -7,7 +7,7 @@
 </div>  
   <c:if test="${errorMessage != null}">
     <div class="row">
-      <p><%= errorMessage%></p>
+      <p class="error_msg"><%= errorMessage%></p>
     </div>
   </c:if>
   <form action="managers?new" class="form" method="POST">

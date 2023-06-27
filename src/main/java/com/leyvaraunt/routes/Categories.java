@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.leyvaraunt.controllers.CategoriesController;
 import com.leyvaraunt.controllers.ControllerAbstract;
-import com.leyvaraunt.controllers.ManagerController;
 
 /**
  *
